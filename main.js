@@ -8,3 +8,25 @@ pinata.testAuthentication().then((result) => {
     //handle error here
     console.log(err);
 });
+
+const fs = require('fs');
+const readableStreamForFile = fs.createReadStream('./egg.png');
+const options = {
+    pinataMetadata: {
+        name: "GIMMEDUCK_TEST",
+        keyvalues: {
+            customKey: 'gimmeduck_test',
+            customKey2: 'gimmeduck_test2'
+        }
+    },
+    pinataOptions: {
+        cidVersion: 0
+    }
+};
+pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
+    //handle results here
+    console.log(result);
+}).catch((err) => {
+    //handle error here
+    console.log(err);
+});
