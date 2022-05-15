@@ -11,13 +11,15 @@ pinata.testAuthentication().then((result) => {
 });
 */
 
+var i = 0;  //gimme_duck index
+var result_ = '';
 const fs = require('fs');
 const readableStreamForFile = fs.createReadStream('./egg.png');
 const options = {
     pinataMetadata: {
-        name: "GIMMEDUCK_TEST",
+        name: "GIMMEDUCK_TEST"+i,
         keyvalues: {
-            customKey: 'gimmeduck_test',
+            customKey: 'gimmeduck_test'+i,
         }
     },
     pinataOptions: {
@@ -27,35 +29,35 @@ const options = {
 pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
     console.log("File Uploaded!");
     console.log(result);
+    result_ = result.IpfsHash;
+
+    /*pin JSON to IPFS*/
+    const body = {
+        "name":"Gimme_duck"+i,
+        "description":"Gimme_duck upload practice!",
+        "image":result_,
+        "attributes":[{"trait_type": "Unknown","value": "Unknown"}]
+    };
+
+    const options2 = {
+        pinataMetadata: {
+            name: "GIMMEDUCK_TEST_JSON"+i,
+            keyvalues: {
+                customKey: 'gimmeduck_test_json',
+            }
+        },
+        pinataOptions: {
+            cidVersion: 0
+        }
+    };
+
+    pinata.pinJSONToIPFS(body, options2).then((result2) => {
+        console.log("JSON Uploaded!");
+        console.log(result2);
+    }).catch((err2) => {
+        console.log(err2);
+    });
+    
 }).catch((err) => {
     console.log(err);
-});
-
-
-/*JSON maker*/
-var i = 0;
-
-let json = `{"name":"Gimme_duck #${i++}","description":"Gimme_duck upload practice!","image":"${result.IpfsHash}","attributes":[{"trait_type": "Unknown","value": "Unknown"}]}`;
-// let fs = require("fs");
-// fs.writeFile(`${i}.json`, json, "utf8", (e)=>(e));
-
-/*pin JSON to IPFS*/
-const body = json;
-const options2 = {
-    pinataMetadata: {
-        name: "GIMMEDUCK_TEST_JSON",
-        keyvalues: {
-            customKey: 'gimmeduck_test_json',
-        }
-    },
-    pinataOptions: {
-        cidVersion: 0
-    }
-};
-
-pinata.pinJSONToIPFS(body, options2).then((result2) => {
-    console.log("JSON Uploaded");
-    console.log(result2);
-}).catch((err2) => {
-    console.log(err2);
 });
