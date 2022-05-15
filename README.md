@@ -17,5 +17,5 @@ IPFS API 연동
 
 결과 :
 ![image](https://user-images.githubusercontent.com/81505421/168483401-29374d75-bce0-4012-8d1c-c583d0294231.png)
-JSON data 형태 :
+JSON data 형태 (OpenSea에 NFT를 올릴 수 있는 JSON 양식 적용) :
 ![image](https://user-images.githubusercontent.com/81505421/168483414-6c7efb56-ce71-42fb-bf61-a443b9a09710.png)
