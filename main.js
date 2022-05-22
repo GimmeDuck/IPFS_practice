@@ -15,6 +15,8 @@ var i = 0;  //gimme_duck index
 var result_ = '';
 const fs = require('fs');
 const readableStreamForFile = fs.createReadStream('./egg.png');
+
+
 const options = {
     pinataMetadata: {
         name: "GIMMEDUCK_TEST"+i,
@@ -26,38 +28,41 @@ const options = {
         cidVersion: 0
     }
 };
+
+
 pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
     console.log("File Uploaded!");
     console.log(result);
     result_ = result.IpfsHash;
+});
 
     /*pin JSON to IPFS*/
-    const body = {
-        "name":"Gimme_duck"+i,
-        "description":"Gimme_duck upload practice!",
-        "image":result_,
-        "attributes":[{"trait_type": "Unknown","value": "Unknown"}]
-    };
+//     const body = {
+//         "name":"Gimme_duck"+i,
+//         "description":"Gimme_duck upload practice!",
+//         "image":result_,
+//         "attributes":[{"trait_type": "Unknown","value": "Unknown"}]
+//     };
 
-    const options2 = {
-        pinataMetadata: {
-            name: "GIMMEDUCK_TEST_JSON"+i,
-            keyvalues: {
-                customKey: 'gimmeduck_test_json',
-            }
-        },
-        pinataOptions: {
-            cidVersion: 0
-        }
-    };
+//     const options2 = {
+//         pinataMetadata: {
+//             name: "GIMMEDUCK_TEST_JSON"+i,
+//             keyvalues: {
+//                 customKey: 'gimmeduck_test_json',
+//             }
+//         },
+//         pinataOptions: {
+//             cidVersion: 0
+//         }
+//     };
 
-    pinata.pinJSONToIPFS(body, options2).then((result2) => {
-        console.log("JSON Uploaded!");
-        console.log(result2);
-    }).catch((err2) => {
-        console.log(err2);
-    });
+//     pinata.pinJSONToIPFS(body, options2).then((result2) => {
+//         console.log("JSON Uploaded!");
+//         console.log(result2);
+//     }).catch((err2) => {
+//         console.log(err2);
+//     });
     
-}).catch((err) => {
-    console.log(err);
-});
+// }).catch((err) => {
+//     console.log(err);
+// });
