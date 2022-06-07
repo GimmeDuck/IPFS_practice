@@ -11,7 +11,7 @@ pinata.testAuthentication().then((result) => {
 });
 */
 
-var i = 0;  //gimme_duck index
+var i = 1;  //gimme_duck index
 var result_ = '';
 const fs = require('fs');
 const readableStreamForFile = fs.createReadStream('./first_duck.png');
