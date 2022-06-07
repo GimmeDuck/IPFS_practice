@@ -11,10 +11,10 @@ pinata.testAuthentication().then((result) => {
 });
 */
 
-var i = 1;  //gimme_duck index
+var i = 2;  //gimme_duck index
 var result_ = '';
 const fs = require('fs');
-const readableStreamForFile = fs.createReadStream('./first_duck.png');
+const readableStreamForFile = fs.createReadStream('./second_duck.png');
 
 const options = {
     pinataMetadata: {
